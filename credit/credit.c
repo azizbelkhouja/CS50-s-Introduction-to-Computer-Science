@@ -7,32 +7,51 @@ int main(void) {
 
     char cardnumber[16];
 
-    printf("Number: ");
+    printf("Number3: ");
 
-    while(1) {
+    while(1) 
+    {
+
         scanf("%s", cardnumber);
-        if ( (strlen(cardnumber) == 15)) {
-            if ((int)cardnumber[0] == 3) {
-                if ((int)cardnumber[1] == 4 || (int)cardnumber[1] == 7) {
+        int length = strlen(cardnumber);
+
+        for (int i=0; i<length; i++) 
+        {
+            if (!isdigit(cardnumber[i]))
+            {
+                while (getchar() != '\n');
+                printf("Number: ");
+            }
+        }
+
+
+
+        //Card type check
+        if ( (length == 15)) {
+            if ((cardnumber[0] - '0') == 3) {
+                if ((cardnumber[1] - '0') == 4 || (cardnumber[1] - '0') == 7) {
                     printf("American Express\n");
                     break;
                 }
             }
-        } else  if ( (strlen(cardnumber) == 16)) {
-                    if ((int)cardnumber[0] == 5) {
-                        if ((int)cardnumber[1] >= 1 || (int)cardnumber[1] <= 5) {
-                            printf("VISA\n");
+        } else  if ( (length == 16)) {
+                    if ((cardnumber[0] - '0') == 5) {
+                        if ((cardnumber[1] - '0') >= 1 || (cardnumber[1] - '0') <= 5) {
+                            //printf("VISA\n");
                             break;
                         }
-                    } else if ((int)cardnumber[0] == 4) printf("MASTERCARD\n");
-                } else  if ( (strlen(cardnumber) == 13)) {
-                            if ((int)cardnumber[0] == 4) {
-                                    printf("MASTERCARD\n");
+                    } else  if ((cardnumber[0] - '0') == 4) {
+                            //printf("MASTERCARD\n");
+                            break;
+                            }
+                } else  if ( (length == 13)) {
+                            if ((cardnumber[0] - '0') == 4) {
+                                    //printf("MASTERCARD\n");
                                     break;
                                 }
                             }
     }
-    printf("END\n");
+    printf("testEND\n");
 
 
 }
