@@ -1,71 +1,70 @@
 #include <stdio.h>
-#include <string.h>
+#include <math.h>
 #include <ctype.h>
 #include <stdlib.h>
+#include <stdbool.h>
+
+int length(long cardnumber);
+bool amex(long cardnumber);
+bool mastercard(long cardnumber);
+bool visa13(long cardnumber);
+bool visa16(long cardnumber);
 
 int main(void) {
+    long cardnumber;
 
-    char cardnumber[16];
+    printf("Number: ");
 
-    printf("Number5: ");
+    while(1) {
 
-    while(1) 
-    {
-
-        scanf("%s", cardnumber);
-        int length = strlen(cardnumber);
-
-
-        //check if all input is integers
-        for (int i=0; i<length; i++) 
-        {
-            if (!isdigit(cardnumber[i]))
-            {
-                while (getchar() != '\n');
-                printf("Number: ");
-            } else continue;
+    if (scanf("%ld", &cardnumber) != 1) {
+            // If scanf fails, clear input buffer
+            while (getchar() != '\n'); // Clear input buffer
+            printf("Number: ");
+            continue;
         }
 
+    int n = length(cardnumber);
+    printf("%i\n", n);
 
 
-        //Card type check
-        if ( (length == 15)) 
-        {
-            if ((cardnumber[0] - '0') == 3) 
-            {
-                if ((cardnumber[1] - '0') == 4 || (cardnumber[1] - '0') == 7) 
-                {
-                    printf("American Express\n");
-                    break;
-                } else continue;
-            } else continue;
-        } else  if ( (length == 16)) 
-                {
-                    if ((cardnumber[0] - '0') == 5) 
-                    {
-                        if ((cardnumber[1] - '0') >= 1 || (cardnumber[1] - '0') <= 5) 
-                        {
-                            printf("VISA\n");
-                            break;
-                        } else continue;
-                    } else  if ((cardnumber[0] - '0') == 4) 
-                            {
-                            printf("MASTERCARD\n");
-                            break;
-                            } else continue;
-                } else  if ( (length == 13))
-                        {
-                            if ((cardnumber[0] - '0') == 4) 
-                            {
-                                printf("MASTERCARD\n");
-                                break;
-                            } else continue;
-                        } else {
-                            while (getchar() != '\n');
-                            printf("mancano digiti! Number: ");
-                        }
+
     }
-    printf("testEND\n");
 
-
+   
 }
+
+
+//length of the card number 
+int length(long cardnumber) {
+
+    int length = 0;
+    while (cardnumber != 0) {
+        cardnumber = cardnumber / 10;
+        length++;
+    }
+    return length;
+}
+
+//card type
+bool amex(long cardnumber) {
+    if (cardnumber / pow(10, 13) == 34 || cardnumber / pow(10, 13) == 37) {
+        return true;
+    } else return false;
+}
+bool mastercard(long cardnumber) {
+    if (cardnumber / pow(10, 14) >= 51 && cardnumber / pow(10, 14) <= 55) {
+        return true;
+    } else return false;
+}
+bool visa13(long cardnumber) {
+    if (cardnumber / pow(10, 12) == 4) {
+        return true;
+    } else return false;
+}
+bool visa16(long cardnumber) {
+    if (cardnumber / pow(10, 15) == 4) {
+        return true;
+    } else return false;
+}
+
