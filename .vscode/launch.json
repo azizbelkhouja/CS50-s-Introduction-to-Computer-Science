@@ -8,8 +8,8 @@
       "args": [],
       "stopAtEntry": false,
       "externalConsole": true,
-      "cwd": ".",
-      "program": "build/Debug/outDebug",
+      "cwd": "c:/Users/le roi/Desktop/CS50’s Introduction to Computer Science",
+      "program": "c:/Users/le roi/Desktop/CS50’s Introduction to Computer Science/build/Debug/outDebug",
       "MIMode": "gdb",
       "miDebuggerPath": "gdb",
       "setupCommands": [
