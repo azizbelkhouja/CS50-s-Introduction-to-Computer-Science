@@ -4,23 +4,30 @@
 
 int main(void) {
 
-    //testing the (int) thing
-    char num = '7';
+    int m = 0, n = 0;
+    long long cardnumber = 4003600000000014;
 
-    printf("%c\n", num);
-    printf("%i\n", num);
-    printf("%i\n", (int)num);
+    //378282246310005
+    //4003600000000014
 
-    //char to int
-    int d = 7;
+    while (cardnumber != 0) {
 
-    printf("\n%i\n", d);
+        printf("card number: %lld\n", cardnumber);
 
-    if ((num - '0') == d) printf("\nwe made it\n");
-    else printf("\nstill debugging\n");
+        m = m + (cardnumber % 10);
+        printf("m= %i\n", m);
 
-    
-    printf("%lld\n", (long long)pow(10, 13));
+        cardnumber = cardnumber / 10;
+        printf("card number: %lld\n", cardnumber);
+        
+        n = n + ((cardnumber % 10) * 2);
+        printf("n= %i\n", n);
 
+        cardnumber = cardnumber / 10;
+        printf("card number: %lld\n", cardnumber);
+
+        printf("\n");
+
+    }
 
 }

@@ -110,12 +110,16 @@ int luhn(long long cardnumber, int length) {
     //378282246310005
     //4003600000000014
 
+    //Now let’s add those products’ digits (i.e., not the products themselves) together:
+    //2 + 0 + 0 + 0 + 0 + 1 + 2 + 0 + 8 = 13
+
     while (cardnumber != 0) {
 
         m = m + (cardnumber % 10);
 
         cardnumber = cardnumber / 10;
         
+        //if cardnumber*2 > 9 we split it, else all good
         n = n + ((cardnumber % 10) * 2);
 
         cardnumber = cardnumber / 10;
