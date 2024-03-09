@@ -20,7 +20,7 @@ int main(void) {
     else printf("\nstill debugging\n");
 
     
-    
+    printf("%lld\n", (long long)pow(10, 13));
 
 
 }
