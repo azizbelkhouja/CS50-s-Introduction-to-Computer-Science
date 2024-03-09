@@ -65,9 +65,15 @@ int main(void) {
     int legit = luhn(cardnumber, n);
 
     if (legit == 0) {
-        if (check == 1) printf("AMEX\n");
+        /*if (check == 1) printf("AMEX\n");
         if (check == 2) printf("MASTERCARD\n");
-        if (check == 3) printf("VISA\n");
+        if (check == 3) printf("VISA\n");*/
+
+        switch (check) {
+            case 1: printf("AMEX\n"); break;
+            case 2: printf("MASTERCARD\n"); break;
+            case 3: printf("VISA\n"); break;
+        }
     } else printf("INVALID\n");
     
     
