@@ -15,8 +15,9 @@ int main(void) {
 
     long long cardnumber;
     int n;
+    int check;
 
-    printf("Number2: ");
+    printf("Number: ");
 
     while(1) {
 
@@ -28,27 +29,26 @@ int main(void) {
             }
 
         n = cardlength(cardnumber);
-        printf("%i\n", n);
         
         //verifying cards
         if (n == 15) {
             if (amex(cardnumber)) {
-                printf("AMEX\n");
+                check = 1;
                 break;
             }
         }
         if (n == 16) {
             if (mastercard(cardnumber)) {
-                printf("MASTERCARD\n");
+                check = 2;
                 break;
             } else if (visa16(cardnumber)) {
-                printf("VISA\n");
+                check = 3;
                 break;
             }
         }
         if (n == 13) {
             if (visa13(cardnumber)) {
-                printf("VISA\n");
+                check = 3;
                 break;
             }
         }
@@ -63,7 +63,14 @@ int main(void) {
 
     //Luhn’s Algorithm
     int legit = luhn(cardnumber, n);
-    printf("total of luhn's algorithm is: %i\n", legit);
+
+    if (legit == 0) {
+        if (check == 1) printf("AMEX\n");
+        if (check == 2) printf("MASTERCARD\n");
+        if (check == 3) printf("VISA\n");
+    } else printf("INVALID\n");
+    
+    
 
 }
 
@@ -122,7 +129,7 @@ int luhn(long long cardnumber, int length) {
         cardnumber = cardnumber / 10;
 
     }
-
-    return n + m;
+    
+    return (n + m) % 10;
 }
 
