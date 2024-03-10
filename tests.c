@@ -1,33 +1,34 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <ctype.h>
 
 int main(void) {
 
-    int m = 0, n = 0;
-    long long cardnumber = 4003600000000014;
+    int worth[] = {1,3,3,2,1,4,2,4,1,8,5,1,3,1,1,3,10,1,1,1,1,4,4,8,4,10};
+    char alphabet[26];
+    int tot = 0;
+    char player1[20], player2[20];
 
-    //378282246310005
-    //4003600000000014
+    printf("player1: ");
+    scanf("%s", player1);
+    
+    printf("player2: ");
+    scanf("%s", player2);
 
-    while (cardnumber != 0) {
+    //Filling the alphabet array
+    for (int i = 0; i < 26; i++) {
 
-        printf("card number: %lld\n", cardnumber);
-
-        m = m + (cardnumber % 10);
-        printf("m= %i\n", m);
-
-        cardnumber = cardnumber / 10;
-        printf("card number: %lld\n", cardnumber);
-        
-        n = n + ((cardnumber % 10) * 2);
-        printf("n= %i\n", n);
-
-        cardnumber = cardnumber / 10;
-        printf("card number: %lld\n", cardnumber);
-
-        printf("\n");
+        alphabet[i] = 65 + i;
 
     }
+
+    for (int j = 0; j < strlen(player1); j++) {
+        for (int k = 0; k < 26; k++) {
+            if (toupper(player1[j]) == alphabet[k]) tot = tot + worth[k];
+        }
+    }
+
+    printf("%i", tot);
 
 }
