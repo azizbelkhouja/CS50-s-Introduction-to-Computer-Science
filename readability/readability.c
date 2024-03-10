@@ -16,19 +16,19 @@ int main(void) {
     fgets(text, 1000, stdin);
 
     int l = letters(text);
-    printf("letters: %i\n", l);
+    //printf("letters: %i\n", l);
 
     int w = words(text);
-    printf("words: %i\n", w);
+    //printf("words: %i\n", w);
     
     int s = sentences(text);
-    printf("sentences: %i\n", s);
+    //printf("sentences: %i\n", s);
 
 
-    float index = coleman(l,w,s);
-    printf("Grade: %.2f\n", index);
-
-
+    int index = coleman(l,w,s);
+    if (index < 1) printf("Before Grade 1\n");
+    else if (index > 16) printf("Grade 16+\n");
+    else printf("Grade %i\n", index);
 
 }
 
@@ -60,7 +60,7 @@ int sentences(char *text) {
     int l = 0;
 
     for (int i = 0; i < strlen(text); i++) {
-        if (ispunct(text[i]) && text[i] != '\'') l = l + 1;
+        if (text[i] == '.' || text[i] == '!' || text[i] == '?') l = l + 1;
     }
 
     return l;
@@ -74,5 +74,5 @@ float coleman(int l, int w, int s) {
 
     float index = 0.0588*lw - 0.296*sw - 15.8;
 
-    return index;
+    return roundf(index);
 }
