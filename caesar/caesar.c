@@ -3,12 +3,15 @@
 #include <string.h>
 #include <stdlib.h>
 
+#define MAX 50
+
 int main (int argc, char *argv[])
 {
 
-    int length = strlen(argv[1]);
+    int n = strlen(argv[1]);
     int key;
-    char *str, *text;
+    char str[MAX], plaintext[MAX], ciphertext[MAX];
+    int length, alphabeticalindex;
 
     if (argc != 2)
     {
@@ -20,7 +23,7 @@ int main (int argc, char *argv[])
     {
         strcpy(str, argv[1]);
 
-        for (int i = 0; i < length; i++)
+        for (int i = 0; i < n; i++)
         {
             if (!isdigit(str[i]))
             {
@@ -33,10 +36,27 @@ int main (int argc, char *argv[])
     key = atoi(str);
 
     printf("plain text: ");
-    scanf("%s", text);
-
-    
+    fgets(plaintext, MAX, stdin);
 
 
+    length = strlen(plaintext);
+
+    for (int j = 0; j < length; j++)
+    {
+        if (isupper(plaintext[j]))
+        {
+            alphabeticalindex = plaintext[j] - 65;
+            ciphertext[j] = ((alphabeticalindex + key) % 26) + 65;
+        }
+        else if (islower(plaintext[j]))
+            {
+                alphabeticalindex = plaintext[j] - 97;
+                ciphertext[j] = ((alphabeticalindex + key) % 26) + 97;
+            }
+        else ciphertext[j] = plaintext[j];
+    }
+    ciphertext[length-1] = '\0';
+
+    printf("\nciphertext is \"%s\"\n", ciphertext);
 
 }
