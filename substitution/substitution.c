@@ -50,36 +50,30 @@ int main (int argc, char *argv[])
     printf("plaintext: ");
     fgets(plaintext, 50, stdin);
 
-    for (int l = 0; l < strlen(plaintext); l++) 
+    for (int l = 0; l < strlen(plaintext); l++)
     {
-        
-            if (islower(plaintext[l]))
+        if (isalpha(plaintext[l]))
+        {
+            if (isupper(plaintext[l]))
             {
-                for (m = 0; m < 26; m++)
-                {
-                    if (plaintext[l] == tolower(key[m]))
-                    {
-                        ciphertext[l] = tolower(key[m]);
-                    }
-                }
-            } 
-            else if (isupper(plaintext[l]))
-                {
-                    for (m = 0; m < 26; m++)
-                    {
-                        if (plaintext[l] == toupper(key[m]))
-                        {
-                            ciphertext[l] = toupper(key[m]);
-                        }
-                    }
-                }
-            else ciphertext[l] = plaintext[l];
+                m = plaintext[l] - 65;
+                ciphertext[l] = toupper(key[m]);
+            }
+            else
+            {
+                m = plaintext[l] - 97;
+                ciphertext[l] = tolower(key[m]);
+            }
+        }
+        else
+        {
+            ciphertext[l] = plaintext[l];
+        }
     }
+    
+
     ciphertext[strlen(plaintext)-1] = '\0';
 
     printf("ciphertext: %s\n", ciphertext);
-
-
-
 
 }
