@@ -16,26 +16,35 @@ int main(int argc, char *argv[])
 
     candidate candidates[MAX];
 
-    
+    for (int i = 0; i < argc - 1; i++) 
+    {
+        strcpy(candidates[i].nameofcandidate, argv[i+1]);
+        candidates[i].numberofvotes = 0;
+    }
+
+
 
     char namevoted[MAX];
     int numberofvotes;
+    int ValidVotesCounter = 0;
 
     printf("number of votes: ");
     scanf("%d", &numberofvotes);
 
-    for (int j = 0; j < numberofvotes; j++)
+    while (ValidVotesCounter < numberofvotes)
     {
         printf("vote: ");
         scanf("%s", namevoted);
 
-        for (int k = 0; k < argc; k++)
+        for (int j = 0; j < argc - 1; j++)
         {
-            if (checkvote(argv[k+1], namevoted))
+            if (checkvote(candidates[j].nameofcandidate, namevoted))
             {
-                printf("valid vote.\n");
-                //add a vote to struct
+                ValidVotesCounter++;
+                candidates[j].numberofvotes++;
+                continue;
             }
+            printf("invalid vote.\n");
         }
     }
 
