@@ -15,24 +15,28 @@ int main(int argc, char *argv[])
 {
 
     candidate candidates[MAX];
+    char namevoted[MAX];
+    int numberofvotes, highestvote;
+    int ValidVotesCounter = 0;
+    bool ValideVote;
+    char winner[MAX];
+
+    printf("START\n");
 
     for (int i = 0; i < argc - 1; i++) 
     {
         strcpy(candidates[i].nameofcandidate, argv[i+1]);
         candidates[i].numberofvotes = 0;
+        //printf("candidate %d is %s\n", i+1, candidates[i].nameofcandidate);
     }
 
-
-
-    char namevoted[MAX];
-    int numberofvotes;
-    int ValidVotesCounter = 0;
-
+    
     printf("number of votes: ");
     scanf("%d", &numberofvotes);
 
     while (ValidVotesCounter < numberofvotes)
     {
+        ValideVote = false;
         printf("vote: ");
         scanf("%s", namevoted);
 
@@ -42,15 +46,32 @@ int main(int argc, char *argv[])
             {
                 ValidVotesCounter++;
                 candidates[j].numberofvotes++;
-                continue;
+                ValideVote = true;
+                break;
             }
-            printf("invalid vote.\n");
+        }
+
+        if (!ValideVote) printf("Invalid Vote.\n");
+
+    }
+
+    strcpy(winner, candidates[0].nameofcandidate);
+
+    for (int l = 0; l < argc - 2; l++) 
+    {
+        if (candidates[l].numberofvotes < candidates[l+1].numberofvotes)
+        {
+            strcpy(winner, candidates[l+1].nameofcandidate);
         }
     }
 
+    printf("AND the winner is %s\n", winner);
+
+    //case when 2 candidates have the same number of votes
+    //...
+
     printf("END\n");
     
-
 }
 
 bool checkvote(char *nameofcandidate, char*namevoted)
