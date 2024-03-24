@@ -19,7 +19,6 @@ int main(int argc, char *argv[])
     int numberofvotes, highestvote;
     int ValidVotesCounter = 0;
     bool ValideVote;
-    char winner[MAX];
 
     printf("START\n");
 
@@ -55,22 +54,20 @@ int main(int argc, char *argv[])
 
     }
 
-    strcpy(winner, candidates[0].nameofcandidate);
+    highestvote = candidates[0].numberofvotes;
 
     for (int l = 0; l < argc - 2; l++) 
     {
         if (candidates[l].numberofvotes < candidates[l+1].numberofvotes)
         {
-            strcpy(winner, candidates[l+1].nameofcandidate);
+            highestvote = candidates[l].numberofvotes;
         }
     }
 
-    printf("AND the winner is %s\n", winner);
-
-    //case when 2 candidates have the same number of votes
-    //...
-
-    printf("END\n");
+    for (int m = 0; m < argc - 1; m++) 
+    {
+        if (candidates[m].numberofvotes == highestvote) printf("%s\t", candidates[m].nameofcandidate);
+    }
     
 }
 
