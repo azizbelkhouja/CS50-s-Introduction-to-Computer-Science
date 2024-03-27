@@ -20,8 +20,6 @@ int main(int argc, char *argv[])
     int ValidVotesCounter = 0;
     bool ValideVote;
 
-    printf("START\n");
-
     for (int i = 0; i < argc - 1; i++) 
     {
         strcpy(candidates[i].nameofcandidate, argv[i+1]);
